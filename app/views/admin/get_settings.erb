@@ -1,0 +1,77 @@
+<div id="admin_settings">
+  <%= form_tag("/admin/settings/set", method: 'post') do %>
+    <div id="dyson">
+      <label>
+        Уровень защиты: 
+        <select name="dyson">
+          <% [nil, :tau, :sigma, :omicron].each do |level| %>
+            <option value="<%= level %>" <%= "selected='selected'" if @defence[:dyson] == level %>><%= level.capitalize if level %></option>
+          <% end %>
+        </select>
+      </label>
+      <span id="tau">
+        Адаптивность капчи отключена. 
+        Для создания тредов требуется дополнительная усложненная капча.
+      </span>
+      <span id="sigma">
+        Адаптивность капчи отключена. 
+        Создание тредов полностью запрещено.
+      </span>
+      <span id="omicron">
+        Адаптивность капчи отключена. 
+        Создание любых сообщений без дефенс-токена запрещено.
+        Создание любых сообщений с мобильной версии запрещено.
+      </span>
+      <br />
+      <label>
+        Автоматически включать уровень &laquo;Tau&raquo;, если за час создано более
+        <input type="text" class='tau' name="speed_limits[tau]" value="<%= @defence[:speed_limits][:tau] %>" />
+        тредов
+      </label>
+      <br /><br />
+      <label>
+        <input type="checkbox" name="spamtxt[enabled]" <%= "checked='checked'" if @defence[:spamtxt][:enabled] == true %> />
+        вайп-фильтр
+      </label>
+      <% 
+        words = ""
+        @defence[:spamtxt][:words].each do |word| 
+          words += word.inspect.gsub('/', '').strip + "\n"
+        end
+      %>
+      <textarea name="spamtxt[words]"><%= words %></textarea>
+    </div>
+    <div id="speed_limits">
+      Таймаут постинга для одного IP:
+      <br />
+      <label>
+        тред
+        <input type="text" name="speed_limits[ip][thread]" value="<%= @defence[:speed_limits][:ip][:thread] %>" />
+      </label>
+      <label>
+        пост
+        <input type="text" name="speed_limits[ip][post]" value="<%= @defence[:speed_limits][:ip][:post] %>" />
+      </label>
+      <br /><br />
+      Таймаут для отключения капчи:
+      <br />
+      <label>
+        тред
+        <input type="text" name="speed_limits[captcha][thread]" value="<%= @defence[:speed_limits][:captcha][:thread] %>" />
+      </label>
+      <label>
+        пост
+        <input type="text" name="speed_limits[captcha][post]" value="<%= @defence[:speed_limits][:captcha][:post] %>" />
+      </label>
+      <br /><br />
+      Глобальный таймаут для создания треда:
+      <br />
+      <label>
+        <input type="text" name="speed_limits[global]" value="<%= @defence[:speed_limits][:global] %>" />
+        секунд
+      </label>
+    </div>
+    <br> <br>
+    <input type="submit" value="Сохранить" id="admin_settings_submit" />
+  <% end %> 
+</div>

@@ -1,0 +1,10 @@
+<div class="replies_rids">
+  Ответы: 
+  <% replies_rids.each do |array| %>
+    <div class="post_link">
+      <a href="/thread/<%= array[:thread] %>#i<%= array[:post] %>">
+        &gt;&gt;<%= array[:post] %>
+      </a>
+    </div>
+  <% end %>
+</div>

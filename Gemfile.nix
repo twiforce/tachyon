@@ -1,0 +1,22 @@
+source 'https://rubygems.org'
+
+gem 'bundler'
+gem 'memcache-client'
+gem 'rvm'
+gem 'rails', '3.2.1'
+gem 'sqlite3'
+gem 'mysql2'
+gem 'faye-rails'
+gem 'rake'
+gem 'execjs'
+gem 'therubyracer'
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'uglifier', '>= 1.0.3'
+  gem 'yui-compressor'
+end
+gem 'jquery-rails'
+gem 'rmagick', require: 'RMagick'
+gem 'bundler'
+gem 'thin'
+gem 'yajl-ruby'

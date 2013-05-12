@@ -1,0 +1,8 @@
+<div id='errors'>
+  <h1>Ошибка!</h1>
+  <ul>
+    <% @response[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+</div>

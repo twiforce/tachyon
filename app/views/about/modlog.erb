@@ -1,0 +1,35 @@
+<% cache("about/#{params[:action]}") do %>
+  <div id='about'>
+    <%= render(partial: 'menu') %>
+    <% logs = AdminLogEntry.order('created_at DESC').limit(30) %>
+    <blockquote>
+      Здесь отображены записи о последних 30 действиях администрации.
+      <br><br>
+      <table class='mod_log' cellspacing='0'>
+        <tr>
+          <td width="100px" class='title'>Дата</td>
+          <td width="120px" class='title'>Объект</td>
+          <td width="250px" class='title'>Действие</td>
+          <td width="150px" class='title'>Причина</td>
+        </tr>
+        <% logs.each do |log| %>
+          <tr>
+            <%
+              day = log.created_at.day.to_s
+              month = log.created_at.month.to_s
+              [day, month].each do |object|
+                if object.size == 1
+                  object = "0" + object
+                end
+              end
+            %>
+            <td><%= "#{day}.#{month}.#{log.created_at.year}" %></td>
+            <td><%= log.target %></td>
+            <td><%= log.action.html_safe %></td>
+            <td><%= log.reason %></td>
+          </tr> 
+        <% end %>
+      </table>
+    </blockquote> 
+  </div>
+<% end %>

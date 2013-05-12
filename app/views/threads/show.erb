@@ -1,0 +1,2 @@
+<%= render(partial: 'form',   locals: {action:  "/thread/#{@response[:thread][:rid]}/reply"}) %>
+<%= render(partial: 'thread', object: @response[:thread])  %>

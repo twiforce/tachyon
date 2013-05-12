@@ -1,0 +1,18 @@
+<div id="about_menu">
+  <% 
+    actions = {
+      'site'    => "О сайте",
+      'engine'  => "О движке",
+      'rules'   => "Правила",
+      'modlog'  => "Модлог",
+      'faq'     => "FAQ",
+    }
+    actions.each do |action, name|
+  %>
+    <% 
+      active = ""
+      active = 'class="active"' if params[:action] == action
+    %>
+    <a href="<%= url_for(action: action) %>" <%= active.html_safe %>><%= name %></a>
+  <% end %>
+</div>

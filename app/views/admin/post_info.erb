@@ -1,0 +1,41 @@
+<table cellpadding='2'>
+  <% if @post.ip_id != nil %>
+    <tr>
+      <td><i>IP:</i></td>
+      <td><%= @post.ip.address %></td>
+    </tr>
+  <% end %>
+  <% if @post.defence_token_id != nil %>
+    <tr>
+      <td><i>DT:</i></td>
+      <td><%= @post.defence_token_id %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td><i>PW:</i></td>
+    <td><%= @post.password %></td>
+  </tr>
+</table>
+<br>
+<div>управление...</div>
+<p>
+  <input type="checkbox" name="delete" />
+  удалить 
+</p>
+<p>
+  <input type="checkbox" name="ban" />
+  забанить на <input type="text" name="ban_days" value="3" /> суток
+</p>
+<% if @post.kind_of?(RThread) %>
+  <p>
+    <input type="checkbox" name="change_tags" />
+    изменить тэги на 
+    <input type='text' id='admin_tags' value='<%= @post.tags_aliases.join(' ') %>'>
+  </p>
+<% end %>
+<p>
+  <input type='text' placeholder="причина" id='admin_reason' name='reason'>
+</p>
+<p>
+  <input type='submit' value='применить' id='admin_submit'>
+</p>

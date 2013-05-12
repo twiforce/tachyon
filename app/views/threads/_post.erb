@@ -1,0 +1,20 @@
+<%
+  url = url_for(controller: 'threads', action: 'show', rid: post[:thread_rid], anchor: "i#{post[:rid]}")
+%>
+
+<div class="post_container" id="i<%= post[:rid] %>"><div class="post">
+  <a href="<%= url %>" class="post_link">#<%= post[:rid] %></a>
+  <span class="post_info">
+    <span class="title"><%= post[:title] %></span>
+    <%= Verbose::date(post[:created_at]) %>
+  </span>
+
+  <% if post[:file] != nil %>
+    <%= render(partial: 'file', object: post[:file]) %>
+  <% end %>
+
+  <blockquote><%= post[:message].html_safe %></blockquote>
+  <% unless post[:replies_rids].empty? %>
+    <%= render(partial: 'replies_rids', object: post[:replies_rids]) %>
+  <% end %>
+</div></div>

@@ -1,0 +1,15 @@
+<%= render(partial: 'form', locals: {action:  "/create"}) %>
+<% 
+  page = params[:page].to_i
+  page = 1 if page == 0
+  cached_pages = Rails.cache.read('cached_pages')
+  cached_pages = {} if cached_pages == nil
+  cached_pages[params[:tag]] = [] if cached_pages[params[:tag]] == nil
+  cached_pages[params[:tag]] << page unless cached_pages[params[:tag]].include?(page)
+  Rails.cache.write('cached_pages', cached_pages)
+  puts cached_pages.inspect
+  cache("#{params[:tag]}/#{page}") do 
+%>
+  <%= render(partial: 'thread', collection: @response[:threads])                                 %>
+  <%= render(partial: 'pages',  locals: {current: params[:page].to_i, total: @response[:pages]}) %>
+<% end %>

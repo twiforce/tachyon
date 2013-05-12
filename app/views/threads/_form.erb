@@ -1,0 +1,48 @@
+<%= form_tag(action, id: 'mobile_form', method: 'post', multipart: true) do %>
+  <% cache("form") do %>
+    <table>
+      <tr>
+        <td>Тема:</td>
+        <td>
+          <%= text_field_tag("message[title]") %>
+          <%= submit_tag("отправить") %>
+        </td>
+      </tr>
+      <tr>
+        <td>Сообщение:</td>
+        <td><%= text_area_tag("message[message]", nil, size: "42x5") %></td>
+      </tr>
+      <tr>
+        <td>Файл:</td>
+        <td><%= file_field_tag("file") %></td>
+      </tr>
+      <tr>
+        <td>Видео:</td>
+        <td><%= text_field_tag("video") %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td>Пароль:</td>
+        <td><%= password_field_tag("message[password]", @password) %></td>
+      </tr>
+      <tr>
+        <% if action == "/create" %>
+          <td>Тэги:</td>
+          <td><%= text_field_tag("tags", @tag.to_s.gsub("~", "b")) %></td>
+        <% else %>
+          <td>Сажа:</td>
+          <td><%= check_box_tag("sage") %> <%= label_tag("sage", "вкл") %></td>
+        <% end %>
+      </tr>
+      <% if @response.has_key?(:captcha) %>
+        <tr>
+          <td>Капча:</td>
+          <td>
+            <img src="/captcha/<%= @response[:captcha] %>.png" alt="captcha", id="captcha_image">
+            <%= hidden_field_tag("captcha[challenge]", @response[:captcha]) %>
+            <%= text_field_tag("captcha[response]") %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+<% end %>

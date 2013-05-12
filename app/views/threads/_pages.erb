@@ -1,0 +1,63 @@
+<%
+  def page_link(number, current)
+    t = "<a href=\"/#{params[:tag]}/"
+    t += "page/#{number}" unless number == 1
+    t += "\" "
+    t += 'class="current"' if number == current
+    t += ">#{number}</a>"
+    return t
+  end
+
+  current = 1 if current < 1
+%>
+
+<div id='paginator'>
+  <span>Страницы:</span>
+  <% if current >  1 %>
+    <% 
+    dots_added = false
+    iterator = 1
+    page = 1
+    while page < current
+    %>
+      <%= page_link(page, current).html_safe %>
+      <% 
+      iterator += 1
+      page += 1
+      %>
+      <% if iterator > 1 and (current - 2) > 3 and dots_added == false 
+      %>
+        ...
+        <%
+        dots_added = true
+        page = current - 3
+        %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= page_link(current, current).html_safe %>
+  <% if current < total %>
+    <%
+    iterator = 0
+    page = current
+    dots_added = false
+    while page < total
+    %>
+       <% iterator += 1
+      page += 1 %> 
+      <% 
+      if iterator > 3
+      %>
+        <% if dots_added == false %>
+          <% if (total - (current + 3)) > 1 %>
+            ...
+          <% end %>
+          <%= page_link(total, current).html_safe %> 
+          <% dots_added = true %>
+        <% end %>
+      <% else %>
+        <%= page_link(page, current).html_safe %> 
+      <% end %>
+    <% end %>
+  <% end %> 
+</div>

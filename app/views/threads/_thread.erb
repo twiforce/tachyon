@@ -1,0 +1,43 @@
+<%
+  url = url_for(controller: 'threads', action: 'show', rid: thread[:rid])
+  cache_token = "m"
+  cache_token = "f" if params[:action] == 'show'
+%>
+
+<hr />
+<% cache("#{thread[:rid]}/#{cache_token}") do %>
+  <div class="thread_container">
+    <div class="thread" id="i<%= thread[:rid] %>">
+      <% if thread[:file] != nil %>
+        <%= render(partial: 'file', object: thread[:file]) %>
+      <% end %>
+
+      <a href="<%= url %>#i<%= thread[:rid] %>" class="post_link">#<%= thread[:rid] %></a>
+      <% if thread[:title] != '' %>
+        <a href="<%= url %>" class="title"><%= thread[:title] %></a>
+      <% end %>
+
+      <span class="post_info">
+        <%= Verbose::date(thread[:created_at]) %>
+      </span>
+
+      <blockquote><%= thread[:message].html_safe %></blockquote>
+      <% unless thread[:replies_rids].empty? %>
+        <%= render(partial: 'replies_rids', object: thread[:replies_rids]) %>
+      <% end %>
+    </div>
+
+    <% 
+      unless thread[:posts].empty? 
+        posts = thread[:posts]
+        if ['index', 'page'].include?(params[:action])
+          posts = posts.last(3)
+        end
+    %>
+        <% if thread[:replies_count] > posts.size %>
+          <div class="omitted"><%= Verbose::omitted(thread[:replies_count]-posts.size) %></div>
+        <% end %>
+        <%= render(partial: 'post', collection: posts) %>
+    <% end %>
+  </div>
+<% end %>

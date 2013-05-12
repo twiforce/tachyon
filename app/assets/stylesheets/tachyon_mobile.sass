@@ -1,0 +1,323 @@
+html, body
+  padding: 0
+  margin: 0
+  font-family: "Trebuchet MS", Trebuchet, sans-serif
+  background-color: #f3f3f3
+  font-size: 16px
+
+h1, h2, h3, blockquote, ul, li
+  margin: 0
+  padding: 0  
+
+a 
+  color: #044983
+  &:hover
+    color: #06f
+  &.post_link
+    font-weight: bold
+    color: #333
+    text-decoration: none
+    &:hover
+      color: #888
+
+.post_link
+  display: inline-block
+  padding: 0px 1px 0px 1px
+  font-size: 14px
+  margin-right: 5px
+
+#main_container
+  max-width: 1000px
+  margin: 0 auto
+
+#content 
+  padding: 5px
+
+#counters
+  float: left
+  margin: 4px 10px 0px 13px
+  margin-top: 4px
+  font-size: 12px
+  span
+    font-size: 14px
+    margin-left: 4px
+    display: inline-block
+    text-align: center
+    background: #777
+    font-family: Consolas, monospace, sans-serif
+    padding: 0px 5px 0px 5px
+    border: 1px solid #555
+    color: #5ff
+    font-weight: bold
+
+#title a, #taglist a
+  text-decoration: none
+
+#menu
+  background-color: #222
+  padding: 4px 13px 4px 13px
+  border: 1px solid #888
+  border-top: none
+  display: table
+  width: 100%
+  margin-bottom: 30px
+  color: #aaa
+  span
+    cursor: default
+  #title 
+    float: left
+    a
+      color: white    
+      font-size: 20px
+      font-family: Verdana, sans-serif
+      &:hover
+        color: #bbb
+    span
+      font-size: 12px
+  #taglist
+    float: right
+    max-width: 80%
+    margin: 10px 0px 0px 0px
+    input
+      background: none
+      border-radius: 0px
+      border: 1px solid #777
+      color: white
+      cursor: pointer
+      &:hover
+        background-color: #444
+
+hr 
+  border: none
+  border-top: 1px solid #ccc
+
+#footer 
+  margin-top: 50px
+  text-align: center
+  padding: 15px
+  border-top: 1px solid #ccc
+  font-size: 12px
+  color: #666
+  font-family: Terminus, Consolas, monospace, sans-serif
+  a 
+    color: #666
+    &:hover
+      color: #06f
+
+#not_found
+  text-align: center
+
+
+.post_info, .file_info, .replies_rids
+  font-size: 12px
+  color: #777
+  font-style: italic
+
+.thread_container
+  width: 100%
+  display: table
+  clear: both
+  margin: 30px 0px 30px 0px
+  
+.thread, .post
+  blockquote
+    font-size: 16px
+    padding: 0px 0px 5px 5px
+    .post_link a
+      font-size: 16px !important
+  img
+    float: left
+  .replies_rids
+    margin-top: 10px
+    a
+      font-size: 12px
+      
+.post_info
+  font-style: normal
+  
+.thread 
+  margin-bottom: 5px
+  display: table
+  width: 100%
+  a.post_link
+    font-size: 16px
+  .title
+    color: black
+    font-size: 18px
+    margin: 0px 0px 5px 10px
+    &:hover
+      color: #555
+  .post_info
+    display: block
+
+.file_info a 
+  color: black
+  &:hover
+    color: #888
+
+.thread .file_info
+  display: block
+
+.post .file_info
+  display: inline-block
+  margin-left: 10px
+
+
+.file_container
+  position: relative
+  float: left
+  margin-right: 7px
+  img, .video_preview, .video
+    margin: 6px 0px 0px 0px
+    padding: 0
+    display: table
+    z-index: 2
+  .play_button 
+    position: absolute
+    top: 28%
+    left: 33%
+    z-index: 3
+.thread .file_container img
+  margin: 0
+
+.video_url
+  position: relative
+  display: block
+  width: 320
+  height: 240
+  img
+    position: relative
+    z-index: 1
+  .play_img
+    position: absolute
+    z-index: 2
+    display: table
+
+.post_container
+  display: table
+  width: 100%
+  .post
+    margin: 3px 0px 4px 0px
+    padding: 0px 10px 10px 10px
+    display: table
+    width: 100%
+    background: #e3e3e3
+    border: 1px solid #c9c9c9
+
+.omitted
+  margin: 6px 0px 6px 0px
+  padding: 10px
+  text-align: center
+  font-size: 14px
+  background: #eee
+  border: 1px dashed #888
+  display: table
+
+
+#paginator
+  color: #555
+  margin-top: 50px
+  span
+    font-size: 14px
+    margin-right: 7px
+  a 
+    display: inline-block
+    padding: 2px 8px 2px 8px
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+    &.current
+      background: #333
+      border: 1px solid #555
+      color: #fff
+      font-weight: bold
+      &:hover
+        text-decoration: none
+
+
+.quote
+  color: #57a
+  font-style: italic
+
+.spoiler 
+  background: #555
+  color: #555
+  &:hover
+    color: white
+
+
+#mobile_form
+  table
+    margin: 0 auto
+    font-size: 14px !important
+
+#errors
+  text-align: center
+  h1
+    color: red
+  ul
+    list-style-type: none
+
+#about
+  max-width: 700px
+  margin: 0 auto
+  #about_menu
+    text-align: center
+    a
+      font-size: 18px
+      margin: 0px 10px 0px 10px
+      font-family: Georgia, serif
+      text-decoration: none
+      color: #666
+      &:hover, &.active
+        color: black
+        text-decoration: underline
+      &.active
+        font-weight: bold
+  blockquote
+    margin-top: 40px
+    font-size: 14px
+    text-align: justify
+    p
+      margin: 0px 0px 0px 30px
+      padding: 0
+  table.markup
+    margin: 0 auto
+    width: 500px
+    font-size: 14px
+    td
+      background: #e5e5e5
+      border: 1px solid #ccc
+      padding: 6px
+      width: 50%
+      .spoiler
+        display: inline
+      &.header
+        font-weight: bold
+        color: #044983
+        font-size: 16px
+        text-align: center
+  table.mod_log
+    margin: 0 auto
+    tr, td
+      border: 1px solid #ccc
+    td
+      padding: 5px
+      font-size: 12px
+      &.title
+        background: #ddd
+        font-size: 14px
+        font-style: italic
+        text-align: center
+        cursor: default
+        color: #666
+
+
+.proofmark
+  background: #97E67E
+  display: inline-block
+  color: #2d4626
+  a
+    color: #006600
+    &:hover
+      color: #003300      

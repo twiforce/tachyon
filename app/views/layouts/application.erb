@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <% if @title != nil %>
+      <title><%= "#{t('main_title')} - #{@title}" %></title>
+    <% else %>
+      <title><%= "#{t('main_title')}" %></title>
+    <% end %>
+    <meta http-equiv="Content-Type", content="text/html; charset=utf-8" />
+    <%= csrf_meta_tags %>
+    <% cache("index/#{@mobile}") do %>
+      <% if @mobile %>
+        <%= stylesheet_link_tag(:tachyon_mobile, media: "all") %>
+      <% else %>
+        <%= stylesheet_link_tag(:tachyon, media: "all") %>
+        <%= javascript_include_tag(:preload) %>
+      <% end %>
+    <% end %>
+    <!-- 
+      This is Freeport 7 to freelancer alpha one dash one.
+      Page rendered in <%= (Time.now.usec - @start_time).abs / 1000000.0 %> seconds.
+      You are clear to launch. Good luck out there.
+     -->
+  </head>
+  <body>
+    <div id="main_container">
+      <% if @mobile %>
+        <%= render(partial: '/mobile_menu', locals: {tag: @tag}) %>
+        <div id="content">
+          <%= yield %>
+        </div>
+        <div id="footer">
+          Tachyon <%= Tachyon::Application.version %>
+          <br />
+          <% if session[:dont_force_mobile] %>
+            <a href="http://<%= @host.gsub('m.', '') + request.headers['REQUEST_PATH'] %>">полная версия</a>
+          <% else %>
+            <a href="http://<%= @host %>/utility/mobile-off">полная версия</a>
+          <% end %>
+          &nbsp;
+          <a href="<%= url_for(controller: 'about', action: 'site', trailing_slash: true) %>">информация</a>
+        </div>
+      <% else %>
+        <div id='loading_container'>
+          <%= image_tag("ui/loading.gif", id: 'loading') %>
+          <blockquote>
+            Для работы полной версии необходима поддержка
+            <br />
+             Javascript, Local Storage и Cookies. 
+            <br />
+            <a href="http://<%= "m.#{@host}#{request.headers['REQUEST_PATH']}" %>">
+              перейти к мобильной версии
+            </a>
+          </blockquote>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

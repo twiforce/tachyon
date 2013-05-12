@@ -1,0 +1,4 @@
+<% I18n.backend.send(:init_translations) %> 
+window.i18n = <%= I18n.backend.send(:translations).to_json %>;
+l = i18n.ru;
+// 1211

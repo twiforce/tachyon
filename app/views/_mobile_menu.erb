@@ -1,0 +1,31 @@
+<div id="menu">
+  <div  id="title">
+    <a href="/">Freeport 7</a>
+    <br />
+    <span>мобильная версия</span>
+  </div>
+  <div id="counters">
+    за сегодня сообщений: <%= @counters[:posts] %>
+    <br />
+    онлайн: <span><%= @counters[:online] %></span>
+  </div>
+  <%= cache("menu/#{params[:tag].to_s}") do %>
+    <form id="taglist" action=".">
+      <input type="submit" value="Перейти к тэгу:" />
+      <select name="tag">
+        <%
+          active = ""
+          active = 'selected="selected"' if @tag == '~'
+        %>
+        <option value="~" <%= active.html_safe %>>Обзор</a>    
+        <% Tag.all.each do |tag| %>
+          <%
+            active = ""
+            active = 'selected="selected"' if @tag == tag
+          %>
+          <option value="<%= tag.alias %>" <%= active.html_safe %>><%= tag.name %></a>    
+        <% end %>
+      </select>
+    </form>
+  <% end %>
+</div>
